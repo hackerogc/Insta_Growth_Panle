@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Onam Jackpot Reveal Countdown</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #fff8e1, #ffe0b2);
+      background-image: url('pic.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: #333;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .countdown-container {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 40px 50px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #4e342e;
+      text-shadow: 1px 1px 3px #fff3e0;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+
+    .timer {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .timer div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px 15px;
+      border-radius: 10px;
+      min-width: 80px;
+    }
+
+    .label {
+      font-size: 0.9rem;
+      margin-top: 5px;
+      color: #5d4037;
+    }
+
+    .sponsor {
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #4e342e;
+      background: rgba(255, 248, 225, 0.85);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      max-width: 400px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .sponsor h2 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #bf360c;
+      text-shadow: 1px 1px 2px #fff3e0;
+    }
+
+    .sponsor ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .sponsor ul li::before {
+      content: "\1F3C6 ";
+    }
+
+    .sponsor .ticket {
+      margin-top: 10px;
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #6d4c41;
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown-container">
+    <h1>🎉 Onam Jackpot Reveal 🎊</h1>
+    <div class="subtitle">Revealing on September 3, 4:00 PM!</div>
+    <div class="timer" id="countdown">
+      <div>
+        <span id="days">00</span>
+        <span class="label">Days</span>
+      </div>
+      <div>
+        <span id="hours">00</span>
+        <span class="label">Hours</span>
+      </div>
+      <div>
+        <span id="minutes">00</span>
+        <span class="label">Minutes</span>
+      </div>
+      <div>
+        <span id="seconds">00</span>
+        <span class="label">Seconds</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sponsor">
+    <h2>Sponsored by REDOX, Guruvayur Club</h2>
+    <strong>Exciting Prizes Await!</strong>
+    <ul>
+      <li>1st Prize: 🚵 Electric Scooter</li>
+      <li>2nd Prize: 🚴 Bicycle</li>
+      <li>3rd Prize: 💰 Gold Coin (for 5 winners)</li>
+    </ul>
+    <div class="ticket">📞 Contact: +91 98765 43210</div>
+    <div class="price">🎟️ Ticket Price: ₹30</div>
+  </div>
+
+  <script>
+    const countdown = () => {
+      const targetDate = new Date("September 3 2025 16:00:00").getTime();
+      const now = new Date().getTime();
+      const gap = targetDate - now;
+
+      const second = 1000;
+      const minute = second * 60;
+      const hour = minute * 60;
+      const day = hour * 24;
+
+      const d = Math.floor(gap / day);
+      const h = Math.floor((gap % day) / hour);
+      const m = Math.floor((gap % hour) / minute);
+      const s = Math.floor((gap % minute) / second);
+
+      document.getElementById("days").innerText = d.toString().padStart(2, '0');
+      document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+      document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+      document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+    };
+
+    countdown();
+    setInterval(countdown, 1000);
+
+    const showLuckyNumber = () => {
+      const luckyNumber = Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000;
+      const resultDiv = document.createElement('div');
+      resultDiv.style.marginTop = '30px';
+      resultDiv.style.fontSize = '2rem';
+      resultDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+      resultDiv.style.padding = '20px';
+      resultDiv.style.borderRadius = '10px';
+      resultDiv.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+      resultDiv.style.color = '#bf360c';
+      resultDiv.style.textAlign = 'center';
+      resultDiv.style.fontWeight = 'bold';
+      resultDiv.innerText = `🎯 Lucky Number Selected: ${luckyNumber}`;
+      document.body.appendChild(resultDiv);
+    };
+
+    const targetTime = new Date("September 3, 2025 16:00:00").getTime();
+    const checkInterval = setInterval(() => {
+      const now = new Date().getTime();
+      if (now >= targetTime) {
+        clearInterval(checkInterval);
+        showLuckyNumber();
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
